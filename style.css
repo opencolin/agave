@@ -80,15 +80,22 @@ a { color: inherit; }
 
 @media (max-width: 760px) {
   .menu-btn {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     position: relative;
     z-index: 2;
-    width: 44px;
-    height: 44px;
-    margin-right: -8px;
-    font-size: 30px;
+    height: 48px;
+    padding: 0 18px 0 14px;
+    border: 2px solid rgba(255,255,255,.9);
+    border-radius: 999px;
+    background: rgba(0,0,0,.25);
+    font: 500 20px/1 "Oswald", sans-serif;
+    letter-spacing: .06em;
+    text-transform: uppercase;
   }
+  .menu-icon { font-size: 26px; line-height: 1; }
+  .site-header { height: 72px; }
   .brand { position: relative; z-index: 2; }
 
   /* Full-screen menu with stacked link buttons. */
@@ -98,7 +105,7 @@ a { color: inherit; }
     inset: 0;
     z-index: 1;
     margin: 0;
-    padding: 88px 24px 32px;
+    padding: 104px 24px 32px;
     flex-direction: column;
     justify-content: center;
     gap: 14px;

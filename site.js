@@ -16,7 +16,7 @@ document.body.insertAdjacentHTML(
   "afterbegin",
   `<header class="site-header">
     <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Agave Lounge</span></a>
-    <button class="menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+    <button class="menu-btn" aria-expanded="false"><span class="menu-icon" aria-hidden="true">☰</span><span class="menu-label">Menu</span></button>
     <ul class="nav">
       ${PAGES.map(([href, label]) =>
         `<li><a href="${href}"${href === here ? ' aria-current="page"' : ""}${
@@ -51,8 +51,8 @@ const setMenu = (open) => {
   header.classList.toggle("menu-open", open);
   document.body.classList.toggle("menu-open", open);
   btn.setAttribute("aria-expanded", open);
-  btn.setAttribute("aria-label", open ? "Close menu" : "Menu");
-  btn.textContent = open ? "✕" : "☰";
+  btn.querySelector(".menu-icon").textContent = open ? "✕" : "☰";
+  btn.querySelector(".menu-label").textContent = open ? "Close" : "Menu";
 };
 btn.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
 nav.addEventListener("click", (e) => e.target.closest("a") && setMenu(false));
