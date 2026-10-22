@@ -201,7 +201,16 @@
     }
   });
 
+  // Pause while the tab or app is in the background, and pick up again on return.
+  let pausedByHide = false;
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden && !root.hidden) pause();
+    if (root.hidden) return;
+    if (document.hidden && !paused) {
+      pausedByHide = true;
+      pause();
+    } else if (!document.hidden && pausedByHide) {
+      pausedByHide = false;
+      resume();
+    }
   });
 })();
