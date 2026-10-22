@@ -105,10 +105,11 @@ a { color: inherit; }
     inset: 0;
     z-index: 1;
     margin: 0;
-    padding: 104px 24px 32px;
+    height: 100dvh;
+    padding: 84px 24px 24px;
     flex-direction: column;
     justify-content: center;
-    gap: 14px;
+    gap: clamp(8px, 1.4dvh, 12px);
     overflow-y: auto;
     background:
       radial-gradient(circle at 20% 15%, rgba(246,65,108,.35), transparent 50%),
@@ -119,11 +120,11 @@ a { color: inherit; }
   .nav li { width: 100%; max-width: 420px; margin: 0 auto; }
   .nav a,
   .nav a:hover {
-    padding: 18px 20px;
+    padding: clamp(9px, 1.6dvh, 14px) 20px;
     border: 2px solid rgba(255,255,255,.85);
     border-radius: 999px;
     background: rgba(255,255,255,.06);
-    font: 500 22px/1.2 "Oswald", sans-serif;
+    font: 500 clamp(16px, 2.4dvh, 20px)/1.2 "Oswald", sans-serif;
     letter-spacing: .04em;
     text-align: center;
     text-transform: uppercase;
