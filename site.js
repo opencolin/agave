@@ -5,6 +5,7 @@ const PAGES = [
   ["music.html", "Music"],
   ["leave-no-trace.html", "Leave No Trace"],
   ["culture.html", "Culture"],
+  ["gallery.html", "Gallery"],
   ["join.html", "Join"],
   ["https://www.instagram.com/agave_lounge/", "Instagram"],
 ];
