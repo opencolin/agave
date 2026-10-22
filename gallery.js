@@ -38,6 +38,7 @@
   let started = 0; // when the current photo timer started
   let elapsed = 0; // photo time already shown before a pause
   let raf = 0;
+  let timer = 0; // advances photos; the progress bar is only drawn per frame
   let muted = true;
 
   const setBar = (n, frac) => (bars[n].style.width = `${Math.min(100, frac * 100)}%`);
@@ -48,7 +49,6 @@
     if (item.type === "photo") {
       const t = elapsed + (paused ? 0 : performance.now() - started);
       frac = t / PHOTO_MS;
-      if (frac >= 1) return next();
     } else if (video.duration) {
       frac = video.currentTime / video.duration;
     }
@@ -65,6 +65,7 @@
     if (n < 0) n = 0;
     if (n >= items.length) return close();
     cancelAnimationFrame(raf);
+    clearTimeout(timer);
     i = n;
     bars.forEach((b, k) => setBar(k, k < i ? 1 : 0));
     count.textContent = `${i + 1} / ${items.length}`;
@@ -80,6 +81,7 @@
       img.src = item.src;
       loading.hidden = true;
       started = performance.now();
+      timer = setTimeout(next, PHOTO_MS);
     } else {
       img.removeAttribute("src");
       loading.hidden = false;
@@ -103,15 +105,19 @@
     if (paused) return;
     paused = true;
     root.classList.add("is-paused");
-    if (items[i].type === "photo") elapsed += performance.now() - started;
-    else video.pause();
+    if (items[i].type === "photo") {
+      clearTimeout(timer);
+      elapsed += performance.now() - started;
+    } else video.pause();
   };
   const resume = () => {
     if (!paused) return;
     paused = false;
     root.classList.remove("is-paused");
-    if (items[i].type === "photo") started = performance.now();
-    else video.play().catch(() => {});
+    if (items[i].type === "photo") {
+      started = performance.now();
+      timer = setTimeout(next, Math.max(0, PHOTO_MS - elapsed));
+    } else video.play().catch(() => {});
   };
 
   const updateSound = () => {
@@ -126,6 +132,7 @@
   };
   const close = () => {
     cancelAnimationFrame(raf);
+    clearTimeout(timer);
     video.pause();
     video.removeAttribute("src");
     root.hidden = true;
