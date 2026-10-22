@@ -267,3 +267,31 @@ h3 { font-size: 24px; margin: 32px 0 8px; }
 .tracks { display: grid; gap: 24px; margin-top: 24px; }
 .track h3 { margin: 0 0 8px; font-size: 20px; }
 .track iframe { display: block; width: 100%; height: 166px; border: 0; }
+.player { position: relative; }
+
+/* iPhone/iPad: our own control laid over SoundCloud's "Play on SoundCloud" screen. */
+.sc-cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  background: var(--navy);
+  color: #fff;
+}
+.sc-play {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+.sc-info { flex: 1; min-width: 0; }
+.sc-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,.25); overflow: hidden; }
+.sc-bar span { display: block; width: 0; height: 100%; background: var(--accent); }
+.sc-time { margin-top: 8px; font-size: 14px; opacity: .85; }
