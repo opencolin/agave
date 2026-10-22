@@ -46,7 +46,14 @@ onScroll();
 
 const btn = header.querySelector(".menu-btn");
 const nav = header.querySelector(".nav");
-btn.addEventListener("click", () => {
-  const open = nav.classList.toggle("open");
+const setMenu = (open) => {
+  nav.classList.toggle("open", open);
+  header.classList.toggle("menu-open", open);
+  document.body.classList.toggle("menu-open", open);
   btn.setAttribute("aria-expanded", open);
-});
+  btn.setAttribute("aria-label", open ? "Close menu" : "Menu");
+  btn.textContent = open ? "✕" : "☰";
+};
+btn.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
+nav.addEventListener("click", (e) => e.target.closest("a") && setMenu(false));
+addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
