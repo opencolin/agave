@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rebuilds stories.html from the web-ready files in assets/gallery.
-# Photos and videos are merged into one story sequence, sorted by file name
+# All videos come first, then all photos, each sorted by file name
 # (so IMG_ files stay in shooting order).
 #
 # To add media: put originals in media/ (kept out of git), then run
@@ -11,7 +11,7 @@ DIR=assets/gallery
 
 tiles=""
 n=0
-for f in $( (ls "$DIR"/*.jpg | grep -v -e '-thumb\.jpg$' -e '-poster\.jpg$'; ls "$DIR"/*.mp4) | sort -t/ -k3); do
+for f in $(ls "$DIR"/*.mp4 | sort; ls "$DIR"/*.jpg | grep -v -e '-thumb\.jpg$' -e '-poster\.jpg$' | sort); do
   b=$(basename "${f%.*}")
   if [[ "$f" == *.mp4 ]]; then
     tiles+="        <a class=\"story-tile is-video\" href=\"$f\" data-type=\"video\"><img src=\"$DIR/$b-poster.jpg\" alt=\"Video from Agave Lounge\" loading=\"lazy\"></a>
