@@ -80,7 +80,7 @@ a { color: inherit; }
   cursor: pointer;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1080px) {
   .menu-btn {
     display: flex;
     align-items: center;
