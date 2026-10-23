@@ -427,9 +427,8 @@ h3 { font-size: 24px; margin: 32px 0 8px; }
 .st-stage video { max-width: 100%; max-height: 100%; width: 100%; height: 100%; object-fit: contain; }
 .stories:not(.is-video) .st-video,
 .stories.is-video .st-img { display: none; }
-@media (min-width: 761px) {
-  .st-stage { left: 50%; right: auto; width: min(100vw, 56.25dvh); transform: translateX(-50%); }
-}
+/* the picture or clip fills the screen on every size (asked 2026-10-22; a desktop used to get a phone-shaped
+   column in the middle, which left a landscape photo small) */
 
 .st-bars {
   position: absolute;
