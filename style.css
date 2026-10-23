@@ -48,6 +48,7 @@ a { color: inherit; }
   white-space: nowrap;
 }
 .brand img { height: 34px; width: auto; }
+.brand .brand-word { height: 30px; }
 
 .nav {
   margin-left: auto;
