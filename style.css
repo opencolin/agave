@@ -94,7 +94,9 @@ a { color: inherit; }
     letter-spacing: .06em;
     text-transform: uppercase;
   }
-  .menu-icon { font-size: 26px; line-height: 1; }
+  .menu-icon { display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; }
+  .menu-icon svg { display: block; }
+  .menu-label { line-height: 1; padding-top: 2px; }
   .site-header { height: 72px; }
   .brand { position: relative; z-index: 2; }
 

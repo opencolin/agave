@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/gallery.html", "destination": "/stories.html", "permanent": true },
+    { "source": "/gallery", "destination": "/stories.html", "permanent": true }
+  ]
+}

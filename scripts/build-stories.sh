@@ -1,10 +1,10 @@
 #!/bin/bash
-# Rebuilds gallery.html from the web-ready files in assets/gallery.
+# Rebuilds stories.html from the web-ready files in assets/gallery.
 # Photos and videos are merged into one story sequence, sorted by file name
 # (so IMG_ files stay in shooting order).
 #
 # To add media: put originals in media/ (kept out of git), then run
-#   scripts/encode-media.sh && scripts/build-gallery.sh
+#   scripts/encode-media.sh && scripts/build-stories.sh
 set -eu
 cd "$(dirname "$0")/.."
 DIR=assets/gallery
@@ -23,19 +23,19 @@ for f in $( (ls "$DIR"/*.jpg | grep -v -e '-thumb\.jpg$' -e '-poster\.jpg$'; ls 
   n=$((n+1))
 done
 
-cat > gallery.html <<HTML
+cat > stories.html <<HTML
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gallery · Agave Lounge</title>
+  <title>Stories · Agave Lounge</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <section class="hero" style="background-image:url(assets/about-11.jpg)">
     <div>
-      <h1>Gallery</h1>
+      <h1>Stories</h1>
       <p><button class="button play-all" type="button">▶ Watch all</button></p>
     </div>
   </section>
@@ -49,9 +49,9 @@ ${tiles}      </div>
   </section>
 
   <script src="site.js"></script>
-  <script src="gallery.js"></script>
+  <script src="stories.js"></script>
 </body>
 </html>
 HTML
 
-echo "gallery.html: $n stories ($(grep -c 'data-type="photo"' gallery.html) photos, $(grep -c 'data-type="video"' gallery.html) videos)"
+echo "stories.html: $n stories ($(grep -c 'data-type="photo"' stories.html) photos, $(grep -c 'data-type="video"' stories.html) videos)"

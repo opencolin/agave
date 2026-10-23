@@ -1,4 +1,4 @@
-// Gallery page: Instagram-stories-style viewer.
+// Stories page: Instagram-stories-style viewer.
 // Tap right/left to go forward/back, hold to pause, swipe down or ✕ to close.
 // Photos show for PHOTO_MS; videos autoplay and advance when they end.
 (() => {
@@ -14,12 +14,12 @@
     <div class="st-bars">${items.map(() => "<span><i></i></span>").join("")}</div>
     <div class="st-top">
       <span class="st-count"></span>
-      <button class="st-sound" type="button" aria-label="Turn sound on">🔇</button>
+      <button class="st-sound" type="button" aria-label="Turn sound off">🔊</button>
       <button class="st-close" type="button" aria-label="Close">✕</button>
     </div>
     <div class="st-stage">
       <img class="st-img" alt="">
-      <video class="st-video" playsinline muted preload="auto"></video>
+      <video class="st-video" playsinline preload="auto"></video>
       <div class="st-loading" hidden></div>
     </div>
     <button class="st-prev" type="button" aria-label="Previous"></button>
@@ -39,7 +39,9 @@
   let elapsed = 0; // photo time already shown before a pause
   let raf = 0;
   let timer = 0; // advances photos; the progress bar is only drawn per frame
-  let muted = true;
+  // Sound starts on. Opening the viewer is a tap, which lets browsers play with
+  // sound; if one still refuses, show() falls back to muted.
+  let muted = false;
 
   const setBar = (n, frac) => (bars[n].style.width = `${Math.min(100, frac * 100)}%`);
 
@@ -137,6 +139,11 @@
     video.removeAttribute("src");
     root.hidden = true;
     document.body.classList.remove("menu-open");
+    // The page opens straight into the viewer, so closing leaves the page:
+    // back to where the visitor came from on this site, otherwise About.
+    const fromSite = document.referrer && new URL(document.referrer).origin === location.origin;
+    if (fromSite && history.length > 1) history.back();
+    else location.href = "index.html";
   };
 
   video.addEventListener("playing", () => (loading.hidden = true));
@@ -203,6 +210,10 @@
 
   // Pause while the tab or app is in the background, and pick up again on return.
   let pausedByHide = false;
+  // Skip the tile grid and go straight into the stories. The grid stays in
+  // the page as a fallback if scripts don't run.
+  open(0);
+
   document.addEventListener("visibilitychange", () => {
     if (root.hidden) return;
     if (document.hidden && !paused) {

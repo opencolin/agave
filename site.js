@@ -5,10 +5,16 @@ const PAGES = [
   ["music.html", "Music"],
   ["leave-no-trace.html", "Leave No Trace"],
   ["culture.html", "Culture"],
-  ["gallery.html", "Gallery"],
+  ["stories.html", "Stories"],
   ["join.html", "Join"],
   ["https://www.instagram.com/agave_lounge/", "Instagram"],
 ];
+
+// Drawn icons so they line up with the "Menu"/"Close" label (font glyphs sit low).
+const ICON_MENU =
+  '<svg viewBox="0 0 20 16" width="20" height="16"><path d="M1 2h18M1 8h18M1 14h18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+const ICON_CLOSE =
+  '<svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
 
 const here = location.pathname.split("/").pop() || "index.html";
 
@@ -16,7 +22,7 @@ document.body.insertAdjacentHTML(
   "afterbegin",
   `<header class="site-header">
     <a class="brand" href="index.html"><img src="assets/logo.png" alt=""><span>Agave Lounge</span></a>
-    <button class="menu-btn" aria-expanded="false"><span class="menu-icon" aria-hidden="true">☰</span><span class="menu-label">Menu</span></button>
+    <button class="menu-btn" aria-expanded="false"><span class="menu-icon" aria-hidden="true">${ICON_MENU}</span><span class="menu-label">Menu</span></button>
     <ul class="nav">
       ${PAGES.map(([href, label]) =>
         `<li><a href="${href}"${href === here ? ' aria-current="page"' : ""}${
@@ -51,7 +57,7 @@ const setMenu = (open) => {
   header.classList.toggle("menu-open", open);
   document.body.classList.toggle("menu-open", open);
   btn.setAttribute("aria-expanded", open);
-  btn.querySelector(".menu-icon").textContent = open ? "✕" : "☰";
+  btn.querySelector(".menu-icon").innerHTML = open ? ICON_CLOSE : ICON_MENU;
   btn.querySelector(".menu-label").textContent = open ? "Close" : "Menu";
 };
 btn.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
