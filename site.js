@@ -8,6 +8,7 @@ const PAGES = [
   ["stories.html", "Stories"],
   ["join.html", "Join"],
   ["https://www.instagram.com/agave_lounge/", "Instagram"],
+  ["https://burningman.chat", "GTA: BRC"],
 ];
 
 // Drawn icons so they line up with the "Menu"/"Close" label (font glyphs sit low).
