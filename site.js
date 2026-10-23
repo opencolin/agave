@@ -21,7 +21,7 @@ const here = location.pathname.split("/").pop() || "index.html";
 document.body.insertAdjacentHTML(
   "afterbegin",
   `<header class="site-header">
-    <a class="brand" href="index.html"><img src="assets/wordmark.png" alt=""><span>Agave Lounge</span></a>
+    <a class="brand" href="index.html"><img src="assets/agave-mark.png" alt=""><span>Agave Lounge</span></a>
     <button class="menu-btn" aria-expanded="false"><span class="menu-icon" aria-hidden="true">${ICON_MENU}</span><span class="menu-label">Menu</span></button>
     <ul class="nav">
       ${PAGES.map(([href, label]) =>
