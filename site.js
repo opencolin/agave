@@ -1,14 +1,14 @@
 // Shared header, footer tiles and nav behavior for every page.
 const PAGES = [
+  ["stories.html", "Stories"],
   ["index.html", "About"],
   ["activities.html", "Activities"],
   ["music.html", "Music"],
   ["leave-no-trace.html", "Leave No Trace"],
   ["culture.html", "Culture"],
-  ["stories.html", "Stories"],
   ["join.html", "Join"],
-  ["https://www.instagram.com/agave_lounge/", "Instagram"],
   ["https://burningman.chat", "GTA: BRC"],
+  ["https://www.instagram.com/agave_lounge/", "Instagram"],
 ];
 
 // Drawn icons so they line up with the "Menu"/"Close" label (font glyphs sit low).
