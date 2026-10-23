@@ -154,12 +154,42 @@ a { color: inherit; }
   background-size: cover;
   background-position: center;
 }
-.hero.home { min-height: 100vh; }
-.hero.home::before { display: none; }
+.hero.home { min-height: 100vh; overflow: hidden; }
 .hero::before {
   content: "";
   position: absolute; inset: 0;
   background: rgba(0,0,0,.25);
+}
+/* The home hero, as agave.dance opens: the camp's swirl fills the screen and turns slowly about its dark eye
+   (which sits at 52.5%, 44% of the picture and is pinned to the screen's centre), drawn larger than the screen
+   so its corners never show, its edge fading into the gradient behind; the white wordmark sits sharp in the
+   eye, glowing and breathing. */
+.hero.home::before {
+  inset: auto; left: 50%; top: 50%; width: 120vmax; height: 120vmax;
+  margin: calc(-120vmax * .44) 0 0 calc(-120vmax * .525);
+  background: url(assets/swirl.jpg) center / cover no-repeat;
+  transform-origin: 52.5% 44%; animation: agave-swirl 160s linear infinite; will-change: transform;
+  -webkit-mask-image: radial-gradient(circle closest-side at 52.5% 44%, #000 78%, transparent 100%);
+  mask-image: radial-gradient(circle closest-side at 52.5% 44%, #000 78%, transparent 100%);
+}
+.hero.home::after {
+  content: ""; position: absolute; inset: 0; margin: auto;
+  width: min(30vmin, 260px); height: calc(min(30vmin, 260px) * 658 / 542);
+  background: url(assets/wordmark.png) center / contain no-repeat;
+  animation: agave-glow 5.4s ease-in-out infinite;
+}
+@keyframes agave-swirl { to { transform: rotate(360deg); } }
+@keyframes agave-glow {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px rgba(255, 255, 255, .55)) drop-shadow(0 0 22px rgba(255, 107, 154, .65)); }
+  33% { filter: drop-shadow(0 0 6px rgba(255, 255, 255, .6)) drop-shadow(0 0 26px rgba(142, 124, 240, .7)); }
+  50% { transform: scale(1.045); filter: drop-shadow(0 0 10px rgba(255, 255, 255, .8)) drop-shadow(0 0 40px rgba(142, 197, 252, .8)); }
+  66% { filter: drop-shadow(0 0 6px rgba(255, 255, 255, .6)) drop-shadow(0 0 26px rgba(255, 154, 139, .7)); }
+}
+/* on a phone the turn needs to be quicker to be seen */
+@media (max-width: 760px) { .hero.home::before { animation-duration: 70s; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero.home::before { animation-duration: 300s; }
+  .hero.home::after { animation: none; filter: drop-shadow(0 0 18px rgba(255, 107, 154, .6)); }
 }
 .hero > * { position: relative; }
 .hero h1 {
