@@ -46,6 +46,20 @@ document.body.insertAdjacentHTML(
   <footer class="site-footer">Agave Lounge</footer>`
 );
 
+// Home page: linktree-style buttons right after the hero.
+document.querySelector(".hero.home")?.insertAdjacentHTML(
+  "afterend",
+  `<nav class="link-menu" aria-label="Explore Agave Lounge">
+    <ul>
+      ${PAGES.filter(([href]) => href !== "index.html").map(([href, label]) =>
+        `<li><a href="${href}"${
+          href.startsWith("http") ? ' target="_blank" rel="noopener"' : ""
+        }>${label}</a></li>`
+      ).join("")}
+    </ul>
+  </nav>`
+);
+
 const header = document.querySelector(".site-header");
 const onScroll = () => header.classList.toggle("scrolled", scrollY > 40);
 addEventListener("scroll", onScroll, { passive: true });
