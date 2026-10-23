@@ -37,6 +37,8 @@ document.body.insertAdjacentHTML(
 document.body.insertAdjacentHTML(
   "beforeend",
   `<nav class="tiles" aria-label="Explore">
+    <a class="tile stories-tile" href="stories.html">Stories</a>
+    <a class="tile about" href="index.html">About</a>
     <a class="tile music" href="music.html">Music</a>
     <a class="tile activities" href="activities.html">Activities</a>
     <a class="tile lnt" href="leave-no-trace.html">Leaving No Trace</a>

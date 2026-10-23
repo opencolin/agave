@@ -325,6 +325,8 @@ h3 { font-size: 24px; margin: 32px 0 8px; }
   transition: background .2s;
 }
 .tile:hover::before { background: rgba(0,0,0,.15); }
+.tile.stories-tile { background-image: url(assets/about-5.jpg); }
+.tile.about      { background-image: url(assets/about-4.jpg); }
 .tile.music      { background-image: url(assets/hero-music.jpg); }
 .tile.activities { background-image: url(assets/hero-activities.jpg); }
 .tile.lnt        { background-image: url(assets/hero-lnt.jpg); }
